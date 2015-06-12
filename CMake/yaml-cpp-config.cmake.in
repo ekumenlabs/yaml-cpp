@@ -1,6 +1,6 @@
 # - Config file for the yaml-cpp package
 # It defines the following variables
-#  YAML_CPP_INCLUDE_DIRS - include directories for YamlCpp
+#  YAML_CPP_INCLUDE_DIRS - include directories for yaml-cpp
 #  YAML_CPP_LIBRARIES    - libraries to link against
  
 # Compute paths
@@ -10,10 +10,10 @@ set(YAML_CPP_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 # Our library dependencies (contains definitions for IMPORTED targets)
 # guard agains multiple inclusions, see:
 # http://public.kitware.com/pipermail/cmake-developers/2011-November/002456.html
-if(NOT YamlCpp_TARGETS_INCLUDED)
-  set(YamlCpp_TARGETS_INCLUDED 1)
-  include("${YAML_CPP_CMAKE_DIR}/YamlCppTargets.cmake")
+if(NOT yaml-cpp_TARGETS_INCLUDED)
+  set(yaml-cpp_TARGETS_INCLUDED 1)
+  include("${YAML_CPP_CMAKE_DIR}/yaml-cpp-targets.cmake")
 endif()
  
-# These are IMPORTED targets created by YamlCppTargets.cmake
+# These are IMPORTED targets created by yaml-cpp-targets.cmake
 set(YAML_CPP_LIBRARIES yaml-cpp)

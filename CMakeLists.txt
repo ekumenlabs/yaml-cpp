@@ -275,7 +275,7 @@ if(MSVC)
 endif()
 
 install(TARGETS yaml-cpp
-	EXPORT YamlCppTargets
+	EXPORT yaml-cpp-targets
 	${_INSTALL_DESTINATIONS}
 )
 install(
@@ -306,7 +306,7 @@ endif()
 if(WIN32 AND NOT CYGWIN)
   set(DEF_INSTALL_CMAKE_DIR CMake)
 else()
-  set(DEF_INSTALL_CMAKE_DIR share/YamlCpp/cmake)
+  set(DEF_INSTALL_CMAKE_DIR share/yaml-cpp/cmake)
 endif()
 set(INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH
   "Installation directory for CMake files")
@@ -316,13 +316,13 @@ if(NOT IS_ABSOLUTE "${INSTALL_CMAKE_DIR}")
 endif()
 
 # Add all targets to the build-tree export set
-export(TARGETS yaml-cpp FILE "${PROJECT_BINARY_DIR}/YamlCppTargets.cmake")
+export(TARGETS yaml-cpp FILE "${PROJECT_BINARY_DIR}/yaml-cpp-targets.cmake")
  
 # Export the package for use from the build-tree
 # (this registers the build-tree with a global CMake-registry)
-export(PACKAGE YamlCpp)
+export(PACKAGE yaml-cpp)
  
-# Create the YamlCppConfig.cmake and YamlCppConfigVersion.cmake files
+# Create the yaml-cpp-config.cmake and yaml-cpp-config-version.cmake files
 file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}"
    "${INCLUDE_INSTALL_ROOT_DIR}")
 
@@ -330,25 +330,25 @@ file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}"
 set(CONF_INCLUDE_DIRS
   "${PROJECT_SOURCE_DIR}/include" "${PROJECT_BINARY_DIR}/include"
 )
-configure_file(CMake/YamlCppConfig.cmake.in
-  "${PROJECT_BINARY_DIR}/YamlCppConfig.cmake" @ONLY)
+configure_file(CMake/yaml-cpp-config.cmake.in
+  "${PROJECT_BINARY_DIR}/yaml-cpp-config.cmake" @ONLY)
 
 # ... for the install tree
 set(CONF_INCLUDE_DIRS "\${YAML_CPP_CMAKE_DIR}/${REL_INCLUDE_DIR}")
-configure_file(CMake/YamlCppConfig.cmake.in
-  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/YamlCppConfig.cmake" @ONLY)
+configure_file(CMake/yaml-cpp-config.cmake.in
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/yaml-cpp-config.cmake" @ONLY)
 
 # ... for both
-configure_file(CMake/YamlCppConfigVersion.cmake.in
-  "${PROJECT_BINARY_DIR}/YamlCppConfigVersion.cmake" @ONLY)
+configure_file(CMake/yaml-cpp-config-version.cmake.in
+  "${PROJECT_BINARY_DIR}/yaml-cpp-config-version.cmake" @ONLY)
  
-# Install the YamlCppConfig.cmake and YamlCppConfigVersion.cmake
+# Install the yaml-cpp-config.cmake and yaml-cpp-config-version.cmake
 install(FILES
-  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/YamlCppConfig.cmake"
-  "${PROJECT_BINARY_DIR}/YamlCppConfigVersion.cmake"
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/yaml-cpp-config.cmake"
+  "${PROJECT_BINARY_DIR}/yaml-cpp-config-version.cmake"
   DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
  
 # Install the export set for use with the install-tree
-install(EXPORT YamlCppTargets DESTINATION
+install(EXPORT yaml-cpp-targets DESTINATION
   "${INSTALL_CMAKE_DIR}" COMPONENT dev)
 
